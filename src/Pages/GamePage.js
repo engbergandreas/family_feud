@@ -9,6 +9,7 @@ import Popup from 'react-animated-popup';
 import useSound from 'use-sound';
 import strikeSound  from './strike.mp4'
 // import audio from '../family_feud_strike.mp4'
+import raggare from './engisraggare.jpeg';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -158,6 +159,12 @@ const Styling = {
 
 }
 
+const StyledImage = styled.img `
+    max-height: 500px;
+    margin: 10px auto;
+    display: block;
+`
+
 function GamePage({category, nrAnswers}) {
     //Get answers from firebase db
     const [wrongAnswerCollection] = useCollection(collection(getFirestore(getApp()),"WrongAnswer"))
@@ -178,6 +185,7 @@ function GamePage({category, nrAnswers}) {
     //Fill the array of answers from DB in the positions where index matches
     answersToShow = answersToShow.map((obj, index) => obj = answers?.find(answer => index == answer.index));
 
+    const showEngisRaggare = answers?.find(a => a.answer == "engis_raggare.jpg");
     return (
         <StyledGameWrapper>
             {/* {wrongAnswer.value ? <StyledWrongAnswer>X</StyledWrongAnswer> : ""} */}
@@ -195,6 +203,7 @@ function GamePage({category, nrAnswers}) {
             {loading? "LOADING ANSWERS" : ""}
             </StyledAnswersWrapper>
             <StyledH1>{info?.category}</StyledH1>
+            {showEngisRaggare ? <StyledImage src={raggare}></StyledImage> : ""}
         </StyledGameWrapper>
     );
 }
