@@ -15,9 +15,11 @@ const StyledEntry = styled.div `
     width: 400px;
     display: flex;
     justify-content: space-between;
-    margin: 5px auto;
+    align-items: center;
+    margin: 10px auto;
     background-color: ${props => props.show ? "green" : "red"};
     cursor: pointer;
+    height: 35px;
 
     & div {
         min-width: 40px;

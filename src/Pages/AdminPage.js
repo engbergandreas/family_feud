@@ -105,10 +105,6 @@ function AdminPage({activeCategory, setActiveCategory, setNrCorrectAnswers}) {
 
 );
 
-
-
-
-
   function CreateCategoryButton({title}) {
     return (
       <StyledButton onClick={() => onCategoryChosen(title)}>
@@ -119,11 +115,10 @@ function AdminPage({activeCategory, setActiveCategory, setNrCorrectAnswers}) {
 }
 
 function OnWrongAnswer() {
-  console.log("calleD")
   FireStoreService.WrongAnswer(true);
   setTimeout(() => {
     FireStoreService.WrongAnswer(false);
-  }, 3000);
+  }, 2500);
 }
 
 
