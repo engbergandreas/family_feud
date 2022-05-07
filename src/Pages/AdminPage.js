@@ -12,7 +12,7 @@ const Categories = [
       {"q": "Jultomten", "points": 55, "show": false},
       {"q": "lärsex", "points": 32, "show": false},
       {"q": "Tosh i NAFFI-stass", "points": 20, "show": false},
-      {"q": "stop share knappeni zoom", "points": 15, "show": false},
+      {"q": "stop share knappen i zoom", "points": 15, "show": false},
       {"q": "Ingvars gitarr som är hemma och är röd", "points": 8, "show": false},
       {"q": "netflixloggan", "points": 15, "show": false},
       {"q": "Komplementfärgen till grön", "points": 1, "show": false},
@@ -47,7 +47,7 @@ const Categories = [
     "questions": [
       {"q": "Inte microvågsugnarna på tp5", "points": 76, "show": false},
       {"q": "Grottan i augusti", "points": 35, "show": false},
-      {"q": "En karm", "points": 29, "show": false},
+      {"q": "En kram", "points": 29, "show": false},
       {"q": "engis_raggare.jpg", "points": 28, "show": false},
       {"q": "Lava", "points": 6, "show": false},
       {"q": "Manteln", "points": 4, "show": false},
@@ -82,10 +82,14 @@ function AdminPage({activeCategory, setActiveCategory, setNrCorrectAnswers}) {
     //Find the index of this answers 
     const answerIndex = Categories.find(cat => cat.category == activeCategory).questions.findIndex(question => question.q == answer.q)  ;
     FireStoreService.createAnswer(activeCategory, answer.q, answer.points, answerIndex).then(docref => {
-          console.log(docref.id)
+          // console.log(docref.id)
         }).catch(reason => console.log(reason));
     answer.show = !answer.show;
     setForceRender(!forceRender);
+  }
+
+  function showCategories() {
+    FireStoreService.clearDocument();
   }
 
   function showCorrectResult(questions) {
@@ -96,9 +100,9 @@ function AdminPage({activeCategory, setActiveCategory, setNrCorrectAnswers}) {
   const CategoriesToShow = Categories.map((category, index) => <CreateCategoryButton  key={index} title={category.category}></CreateCategoryButton>);
   return (
     <div className="App">
-        <StyledButton onClick={() => setShowResult(!showResult)}>Show result</StyledButton>
+        <StyledButton onClick={() => showCorrectResult(qs)}>Reset colors</StyledButton>
         {CategoriesToShow}
-        <StyledButton onClick={() => showCorrectResult(qs)}>Show correct result</StyledButton>
+        <StyledButton onClick={() => showCategories()}>Show Categories</StyledButton>
         <StyledButton onClick={OnWrongAnswer}>Wrong Answer</StyledButton>
         <Questions questions={qs} result={showResult} onClickFunction={onAnswerClicked}></Questions>
     </div>

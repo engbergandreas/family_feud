@@ -120,7 +120,6 @@ const StyledH1 = styled.h1 `
     color: white;
     margin: 0;
     margin-top: 10px;
-
 `
 
 // const StyledWrongAnswer = styled.div `
@@ -166,10 +165,9 @@ const StyledImage = styled.img `
 `
 
 function GamePage({category, nrAnswers}) {
-    //Get answers from firebase db
     const [wrongAnswerCollection] = useCollection(collection(getFirestore(getApp()),"WrongAnswer"))
-    const wrongAnswer = wrongAnswerCollection?.docs[0].data()
-    // console.log(wrongAnswer.value);
+    const wrongAnswer = wrongAnswerCollection?.docs[0].data();
+    //Get answers from firebase db
     const [value, loading, error] = useCollection(collection(getFirestore(getApp()), "Answers"));
     const answers = value?.docs.map(doc => doc.data());
     //Get the info object in the db
@@ -178,12 +176,16 @@ function GamePage({category, nrAnswers}) {
     const answerLen = info ? info.nrAnswers : 0;
     let answersToShow = Array.apply(null, Array(answerLen)).map(function () {});
     // const filteredAnswers = answers?.filter(a => (a.answer != "info"));  
+
     
     const [playSound] = useSound(strikeSound);
     // const sortedAnswers = filteredAnswers?.sort((a,b) => b.points - a.points);
 
     //Fill the array of answers from DB in the positions where index matches
     answersToShow = answersToShow.map((obj, index) => obj = answers?.find(answer => index == answer.index));
+
+    const showCategories = !answersToShow.length > 0;
+    // console.log(showCategories)
 
     const showEngisRaggare = answers?.find(a => a.answer == "engis_raggare.jpg");
     return (
@@ -197,14 +199,35 @@ function GamePage({category, nrAnswers}) {
             </Popup>
             : ""
             }
-            <StyledAnswersWrapper>
-            {answersToShow.map((answer, index) => answer ? <Answer key={index} obj={answer}></Answer> :
-             <HiddenAnswers key={index} content={index + 1}></HiddenAnswers>)}
-            {loading? "LOADING ANSWERS" : ""}
-            </StyledAnswersWrapper>
-            <StyledH1>{info?.category}</StyledH1>
-            {showEngisRaggare ? <StyledImage src={raggare}></StyledImage> : ""}
+            {showCategories ? <Categories></Categories> : 
+            <div>
+                <StyledAnswersWrapper>
+                {answersToShow.map((answer, index) => answer ? <Answer key={index} obj={answer}></Answer> :
+                <HiddenAnswers key={index} content={index + 1}></HiddenAnswers>)}
+                {loading? "LOADING ANSWERS" : ""}
+                </StyledAnswersWrapper>
+                <StyledH1>{info?.category}</StyledH1>
+                {showEngisRaggare ? <StyledImage src={raggare}></StyledImage> : ""}
+            </div>
+            }
         </StyledGameWrapper>
+    );
+}
+
+const StyledCategoryWrapper = styled.div `
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+`
+
+function Categories() {
+    return (
+        <StyledCategoryWrapper>
+            <StyledH1 style={{marginTop: '0'}}>Rött</StyledH1>
+            <StyledH1 style={{marginTop: '0'}}>Nolle-P</StyledH1>
+            <StyledH1 style={{marginTop: '0'}}>På Ica</StyledH1>
+            <StyledH1 style={{marginTop: '0'}}>Något varmt</StyledH1>
+        </StyledCategoryWrapper>
     );
 }
 
