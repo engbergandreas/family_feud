@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/family_feud/static/css/main.f8ee4f39.css",
-    "main.js": "/family_feud/static/js/main.33ab0404.js",
+    "main.js": "/family_feud/static/js/main.d627e77f.js",
     "static/js/845.88229a27.chunk.js": "/family_feud/static/js/845.88229a27.chunk.js",
     "static/js/787.77d89003.chunk.js": "/family_feud/static/js/787.77d89003.chunk.js",
     "static/media/engisraggare.jpeg": "/family_feud/static/media/engisraggare.e4d3c3087c4c03d11a67.jpeg",
     "static/media/strike.mp4": "/family_feud/static/media/strike.422c41c3d2f1983033cf.mp4",
     "index.html": "/family_feud/index.html",
     "main.f8ee4f39.css.map": "/family_feud/static/css/main.f8ee4f39.css.map",
-    "main.33ab0404.js.map": "/family_feud/static/js/main.33ab0404.js.map",
+    "main.d627e77f.js.map": "/family_feud/static/js/main.d627e77f.js.map",
     "845.88229a27.chunk.js.map": "/family_feud/static/js/845.88229a27.chunk.js.map",
     "787.77d89003.chunk.js.map": "/family_feud/static/js/787.77d89003.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f8ee4f39.css",
-    "static/js/main.33ab0404.js"
+    "static/js/main.d627e77f.js"
   ]
 }
