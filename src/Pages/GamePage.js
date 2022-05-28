@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import Popup from 'react-animated-popup';
 import useSound from 'use-sound';
 import strikeSound  from './strike.mp4'
+import correctSound from './correct.mp3'
 // import audio from '../family_feud_strike.mp4'
 import raggare from './engisraggare.jpeg';
 
@@ -174,11 +175,14 @@ function GamePage({category, nrAnswers}) {
     const info = answers?.find(a => a.answer == "info");
     //Create an empty array of answers
     const answerLen = info ? info.nrAnswers : 0;
+    console.log(answers)
     let answersToShow = Array.apply(null, Array(answerLen)).map(function () {});
     // const filteredAnswers = answers?.filter(a => (a.answer != "info"));  
 
     
     const [playSound] = useSound(strikeSound);
+    const [playCorrectEffect] = useSound(correctSound);
+    
     // const sortedAnswers = filteredAnswers?.sort((a,b) => b.points - a.points);
 
     //Fill the array of answers from DB in the positions where index matches
@@ -195,7 +199,7 @@ function GamePage({category, nrAnswers}) {
             {wrongAnswer ? 
             <Popup visible={wrongAnswer?.value} onClose={()=>{}} style={Styling}>
                 <FontAwesomeIcon icon={faX} size={"10x"} />
-                {wrongAnswer.value ? playSound() : ""}
+                {wrongAnswer.value ? playSound() : answers.length > 1 ? playCorrectEffect() : ""}
             </Popup>
             : ""
             }
