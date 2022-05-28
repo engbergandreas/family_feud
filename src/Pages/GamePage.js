@@ -175,7 +175,6 @@ function GamePage({category, nrAnswers}) {
     const info = answers?.find(a => a.answer == "info");
     //Create an empty array of answers
     const answerLen = info ? info.nrAnswers : 0;
-    console.log(answers)
     let answersToShow = Array.apply(null, Array(answerLen)).map(function () {});
     // const filteredAnswers = answers?.filter(a => (a.answer != "info"));  
 
@@ -187,9 +186,7 @@ function GamePage({category, nrAnswers}) {
 
     //Fill the array of answers from DB in the positions where index matches
     answersToShow = answersToShow.map((obj, index) => obj = answers?.find(answer => index == answer.index));
-
     const showCategories = !answersToShow.length > 0;
-    // console.log(showCategories)
 
     const showEngisRaggare = answers?.find(a => a.answer == "engis_raggare.jpg");
     return (
